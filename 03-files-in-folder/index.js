@@ -14,7 +14,7 @@ async function getFilesInfo() {
 			});
 
 			console.log(
-				`${path.basename(pathsToCheck[i], extension)} - ${extension.slice(1)} - ${fileStats.size}`
+				`${path.basename(pathsToCheck[i], extension)} - ${extension.slice(1)} - ${fileStats.size} b`
 			);
 		}
 	}
