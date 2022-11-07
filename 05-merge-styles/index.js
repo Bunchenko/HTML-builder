@@ -1,6 +1,5 @@
 const { readdir } = require('fs/promises');
 const fs = require('fs');
-const rl = require('readline');
 const path = require('path');
 
 async function createBundle() {
@@ -22,15 +21,17 @@ function mergeFiles(filePathsArr) {
 
 	for (const filePath of filePathsArr) {
 		const readStream = fs.createReadStream(filePath, 'utf-8');
-		const readLine = rl.createInterface(readStream, writeStream);
 
-		readLine.on('line', (data) => {
-			writeStream.write(data);
-			writeStream.write('\n');
+		readStream.on('data', (chunk) => {
+			writeStream.write(chunk, (err) => {
+				if (err) throw err;
+			});
 		});
-		readLine.off('line', (data) => {
-			writeStream.write(data);
-			writeStream.write('\n');
+
+		readStream.off('data', (chunk) => {
+			writeStream.write(chunk, (err) => {
+				if (err) throw err;
+			});
 		});
 	}
 }
