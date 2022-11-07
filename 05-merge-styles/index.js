@@ -27,12 +27,6 @@ function mergeFiles(filePathsArr) {
 				if (err) throw err;
 			});
 		});
-
-		readStream.off('data', (chunk) => {
-			writeStream.write(chunk, (err) => {
-				if (err) throw err;
-			});
-		});
 	}
 }
 
