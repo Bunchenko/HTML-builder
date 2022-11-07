@@ -26,9 +26,11 @@ function mergeFiles(filePathsArr) {
 
 		readLine.on('line', (data) => {
 			writeStream.write(data);
+			writeStream.write('\n');
 		});
 		readLine.off('line', (data) => {
 			writeStream.write(data);
+			writeStream.write('\n');
 		});
 	}
 }
